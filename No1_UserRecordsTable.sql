@@ -5,6 +5,7 @@ Create TABLE tbUser (
   CreateDate DATETIME NOT NULL DEFAULT GETDATE90,
   CONSTRAINT PK_tbUser PRIMARY KEY (UserID)
 );
+GO
 
 
 CREATE PROCEDURE usp_tbUser_Select
@@ -21,6 +22,7 @@ BEGIN
   FROM tbUser
   WHERE (UserID IS NULL OR UserID = @UserID);
 END;
+GO
 
 
 CREATE PROCEDURE usp_tbUser_Insert
@@ -35,6 +37,7 @@ BEGIN
 
   SELECT SCOPE_IDENTITY() as NewUserID;
 END;
+GO
 
 
 CREATE PROCEDURE usp_tbUser_Update
@@ -51,6 +54,7 @@ BEGIN
    UserNo = @UserNo
  WHERE UserID = @UserID;
 END;
+GO
 
 
 CREATE PROCEDURE usp_tbUser_Delete
@@ -62,3 +66,4 @@ BEGIN
   DELETE FROM tbUser
   WHERE UserID = @UserID;
 END;
+GO
