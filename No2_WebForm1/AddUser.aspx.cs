@@ -22,6 +22,7 @@ namespace WebForm
       if (!int.TryParse(txtUserNo.Text.Trim(), out userNo))
       {
          ShowMessage("User No must be valid integer", isSuccess: false);
+         return;
       }
 
       try
