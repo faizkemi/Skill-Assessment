@@ -28,7 +28,7 @@
           color: #333333;
           border-bottom: 2px solid #0078d4;
           padding-bottom: 10px;
-       }          
+       }
        .form-group {  
           margin-bottom: 18px;
        }
@@ -38,7 +38,6 @@
           font-weight: bold;
           color: #555555;
           margin-bottom: 5px;
-
        }
        .required {
           color: #d93025;
@@ -87,13 +86,24 @@
           display: none;
        }
        .message.success {
+          background-color: #dff6dd;
           color: #1efe1e;
           border: 1px solid #b2dfb2;
        }
        .message.error {
+          background-color: #fde7e9;
           color: #a80000;
           border: 1px solid #f4b8bb;
        }
+      .nav-link {
+          display: block;
+          text-align: center;
+          margin-top: 16px;
+          font-size: 13px;
+          color: #0078d4;
+          text-decoration: none;
+      }
+      .nav-link:hover { text-decoration: underline; }
    </style>
 </head>
 <body>
@@ -145,6 +155,7 @@
          <asp:Panel ID="pniMessage" runat="server" CssClass="message" style="display:none;">
             <asp:Label ID="lblMessage" runat="server" />
          </asp: Panel>
+         <a href="ManageUsers.aspx" class="nav-link">View All Users &rsaquo;</a>
       </div>
    </form>
 </body>
