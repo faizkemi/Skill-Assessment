@@ -4,158 +4,249 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
    <meta charset="utf-8" />
-   <title>Add New User</title>
+   <title>Manage Users</title>
    <style>
        body {
           font-family: Arial, sans-serif;
           background-color: #2f4f4f4;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          min-height: 100vh;
+          padding: 30px;
           margin: 0;
        }
-      .form-container {
+      .page-container {
+          max-width: 900px;
+          margin: 0 auto;
           background-color: #ffffff;
-          padding: 36px 40px;
+          padding: 30px 36px;
           border-radius: 8px;
           box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-          width: 380px;
+       }
+       .page-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border-bottom: 2px solid #0078d4;
+          padding-bottom: 12px;
+          margin-bottom: 20px;
        }
        h2 {
-          margin: 0 0 24px 0;
+          margin: 0;
           font-size: 20px;
           color: #333333;
-          border-bottom: 2px solid #0078d4;
-          padding-bottom: 10px;
        }
-       .form-group {  
-          margin-bottom: 18px;
-       }
-       label {
-          display: block;
-          font-size: 13px;
-          font-weight: bold;
-          color: #555555;
-          margin-bottom: 5px;
-       }
-       .required {
-          color: #d93025;
-          margin-left: 2px;
-       }
-       input[type="text"],
-       input[type="number"] {
-          width: 100%;
-          padding: 8px 10px;
-          border: 1px solid #cccccc;
-          border-radius: 4px;
-          font-size: 14px;
-          box-sizing: border-box;
-          transition: border-color 0.2s;
-       }
-       input[type="text"]:focus,
-       input[type="number"]:focus {
-          border-color: #0078d4;
-          outline: none;
-       }
-       .validator-msg {
-          color: #d93025;
-          font-size: 12px;
-          margin-top: 4px;
-          display: block;
-       }
-       .btn-submit {
-          width: 100%;
-          padding: 10px;
+       .btn-add (
+          padding: 8px 16px;
           background-color: #0078d4;
           color: #ffffff;
           border: none;
           border-radius: 4px;
-          font-size: 15px;
+          font-size: 13px;
+          text-decoration: none;
           cursor: pointer;
-          margin-top: 8px;
        }
-       .btn-submit:hover {
-          background-color: #005ea2;
-       }          
-       message {
-          margin-top: 16px;
+       .btn-add:hover { background-color: #005ea2;}
+
+       /* Grid */
+       .grid-table {
+          width: 100%;
+          border-collapse: collapse;
+          font-size: 14px;
+       }
+      .grid-table th {
+          background-color: #0078d4;
+          color: #ffffff;
           padding: 10px 12px;
+          text-align: left;
+       }
+       .grid-table td {
+          padding: 9px 12px;
+          border-bottom: 1px solid #e0e0e0;
+          vertical-align: middle;
+       }
+       .grid-table tr:hover td { background-color: #f0f6ff; }
+       .grid-table tr.edit-row td { background-color: #fffbe6; )
+
+       /* Edit inputs inside grid /
+       .grid-table input[type="text"],
+       .grid-table input[type="number"] {
+          width: 100%;
+          padding: 5px 7px;
+          border: 1px solid #aaa;
+          border-radius: 3px;
+          font-size: 13px;
+          box-sizing: border-box;
+       }          
+       .grid-table input[type="text"]:focus,
+       .grid-table input[type="number"]:focus {
+          border-color: #0078d4;
+          outline: none;
+       }
+       
+       /* Action buttons */
+       .btn-edit {
+          padding: 4px 12px;
+          background-color: #107c10:
+          color: #fff;
+          border: none;
+          border-radius: 3px;
+          cursor: pointer;
+          font-size: 12px;
+          margin-right: 4px;
+       }
+       .btn-edit:hover { background-color: #0b5e0b; }
+       .btn-delete {
+          padding: 4px 12px;
+          background-color: #d93025;
+          color: #fff;
+          border: none;
+          border-radius: 3px;
+          cursor: pointer;
+          font-size: 12px;
+       }
+       .btn-delete:hover { background-color: #a50e0e; }
+       .btn-save {
+          padding: 4px 12px;
+          background-color: #0078d4;
+          color: #fff;
+          border: none;
+          border-radius: 3px;
+          cursor: pointer;
+          font-size: 12px;
+          margin-right: 4px;
+       }
+      .btn-save:hover {background-color: #005ea2; }
+      .btn-cancel {
+          padding: 4px 12px;
+          background-color: #666;
+          color: #fff;
+          border: none;
+          border-radius: 3px;
+          cursor: pointer;
+          font-size: 12px;
+      }
+      .btn-cancel:hover { background-color: #444: )
+
+      /* Message */
+      .message {
+          padding: 10px 14px;
           border-radius: 4px;
           font-size: 13px;
-          display: none;
-       }
-       .message.success {
+          margin-bottom: 16px;
+      }
+      .message.success {
           background-color: #dff6dd;
-          color: #1efe1e;
+          color: #1e6e1e;
           border: 1px solid #b2dfb2;
-       }
-       .message.error {
+      }
+      .message.error {
           background-color: #fde7e9;
           color: #a80000;
           border: 1px solid #f4b8bb;
-       }
-      .nav-link {
-          display: block;
-          text-align: center;
-          margin-top: 16px;
-          font-size: 13px;
-          color: #0078d4;
-          text-decoration: none;
       }
-      .nav-link:hover { text-decoration: underline; }
+      .no-records {
+          text-align: center;
+          color: #888;
+          padding: 20px;
+      }
+      .validator-msg (
+          color: #d93025;
+          font-size: 11px;
+          display: block;
+      }
    </style>
 </head>
 <body>
-   <form id="fraAddüser" runat="server">
-      <div class="form-container">
-         <h2>Add New User</h2>
-         
-         <div class="form-group">
-             <label for "tatllanrilame">User Name <span class="required">*</span></label>
-             <asp:TextBox ID="txtUserName" runat="server" MaxLength 20" CeeClass"/>
-             <asp:RequiredFieldValidator
-                ID-"rfvUserName" runat="server"
-                ControlToValidate="txtUseriiame"
-                ErrorMessage "User Name is required."
-                CanCiana validator-mag"
-                Display "Dynamic"/>
-             <asp:RegularExpressionValidator
-                ID-"revUserName" runat="server"
-                ControlToValidate="txtUserName"
-                ValidationExpression" [^\),(0,19)$"
-                ErrorMessage "User Name must not exceed 20 characters."
-                CssClaas validator-mag"
-                Display "Dynamic" />
+   <form id="fraManageUsers" runat="server">
+      <div class="page-container">
+         <div class="page-header">
+            <h2>Manage Users</h2>
+            <a href="AddUser.aspx" class="btn-add">+ Add New User</a>
          </div>
 
-         <div class="form-group">
-             <label for="txtUserNo">User No <span class="required">*</span></label>
-             <asp:TextBox ID="txtUserNo" runat="server" />
-             <asp:RequiredFieldValidator
-                ID="rfvUserNo" runat="server"
-                ControlToValidate="txtUserNo"
-                ErrorMessage "User No is required."
-                CssClass="validator-msg"
-                Display "Dynamic" />
-             <asp: RangeValidator
-                ID="rvUserNo" runat="server"
-                ControlToValidate="txtUserNo"
-                Type "Integer"
-                MinimumValue="-2147483648"
-                MaximumValue="2147483647"
-                ErrorMessage "User No must be a valid integer."
-                CssClass="validator-msg"
-                Display "Dynamic" />
-         </div>
-
-         <asp:Button ID="btnSubmit" runat="server" Text="Add User"
-            CssClass="btn-submit" OnClick="btnSubmit Click" />
-         
-         <asp:Panel ID="pniMessage" runat="server" CssClass="message" style="display:none;">
+         <asp: Panel ID="pnlMessage" runat="server" Visible="false">
             <asp:Label ID="lblMessage" runat="server" />
-         </asp: Panel>
-         <a href="ManageUsers.aspx" class="nav-link">View All Users &rsaquo;</a>
+         </asp:Panel>
+
+         <asp:GridView ID="gvUsers" runat="server"
+            AutoGenerateColumns="false"
+            CssClass="grid-table"
+            DataKeyNames="UserID"
+            OnRowEditing="gvUsers_RowEditing"
+            OnRowCancelingEdit="gvUsers RowCancelingEdit"
+            OnRowUpdating="gvUsers RowUpdating"
+            OnRowDeleting="gvUsers RowDeleting"
+            Empty DataText="&lt;p class='no-records'&gt;No records found.$lt;/p&gt;">
+
+            <Columns>
+               <asp:BoundField DataField="UserID" HeaderText-"User ID" ReadOnly="true" />
+
+               <asp:TemplateField HeaderText="User Name">
+                   <ItemTemplate>
+                      <asp:Label ID="lblUserName" runat="server" Text='<%#  Eval("UserName") %>' />                
+                   </ItemTemplate>
+                   <EditItemTemplate>
+                      <asp:TextBox ID="txtEditUserName" runat ="server" Text='<%#  Eval("UserName") %>' Maxlength="20" /> 
+                      <asp:RequiredFieldValidator runat="server"
+                         ControlToValidate="txtEditUserName"
+                         ErrorMessage "Required."
+                         CasClass="validator-mag"
+                         Display "Dynamic"
+                         ValidationGroup "EditGroup" />
+                   </EditItemTemplate>
+               </asp:TemplateField>
+
+               <asp:Templatefield HeaderText="User No">
+                   <ItemTemplate>
+                      <asp:Label ID="lblUserNo" runat="server" Text='<%#  Eval("UserN0") %>' />                
+                   </ItemTemplate>
+                   <EditItemTemplate>
+                      <asp:TextBox ID="txtEditUserNo" runat="server" Text='<%#  Eval("UserNo") %>' />
+                      <asp:RequiredFieldValidator runat="server"
+                         ControlToValidate="txtEditUserNo"
+                         ErrorMessage="Required."
+                         CasClass="validator-msg"
+                         Display "Dynamic"
+                         ValidationGroup="EditGroup" />
+                      <asp: RangeValidator runat="server"
+                         ControlToValidate="txtEditUserNo"
+                         Type "Integer"
+                         MinimumValue="-2147483648"
+                         MaximumValue="2147483647"
+                         ErrorMessage "Must be a valid integer."
+                         CssClass="validator-msg"
+                         Display "Dynamic"
+                         ValidationGroup="EditGroup" />
+                   </EditItemTemplate>
+               </asp:TemplateField>
+            
+               <asp:BoundField DataField="CreateDate" HeaderText="Create Date"
+                   ReadOnly="true" DataFormatString="{0: yyyy-MM-dd HH:mm:ss)" />
+               <asp:TemplateField HeaderText="Actions">
+                   <ItemTemplate>
+                      <asp:LinkButton ID="btnEdit" runat="server"
+                         CommandName="Edit"
+                         CssClass="btn-edit"
+                         Text "Edit" />
+                      <asp:LinkButton ID="btnDelete" runat="server"
+                         CommandName="Delete"
+                         CssClass="btn-delete"
+                         Text "Delete"
+                         OnClientClick="return confirm('Delete this user?');" />
+                   </ItemTemplate>
+                   <EditItemTemplate>
+                      <asp:LinkButton ID="btnSave" runat="server"
+                         CommandName="Update"
+                         CssClass="btn-save"
+                         Text="Save"
+                         ValidationGroup "EditGroup" />
+                      <asp:LinkButton ID="btnCancel" runat="server"
+                         CommandName="Cancel"
+                         CssClass="btn-cancel"
+                         Text "Cancel"
+                         CausesValidation="false" />
+                   </EditItemTemplate>
+               </asp:TemplateField>
+            </Columns>
+         </asp:GridView>
       </div>
    </form>
 </body>
